@@ -12,7 +12,7 @@ Objective
 
 The objective of building a robust online marketplace is to create a platform where users can efficiently buy and sell products or services while ensuring a positive user experience and smooth operational functionality
 
-Technologies Used
+Technologies Used 
 
 Creating a robust online marketplace involves a variety of technologies, each serving a specific purpose in building a comprehensive and functional platform. Here’s a breakdown of the technologies typically used in the development of such a marketplace:
 
