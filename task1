@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Marketplace</h1>
+        <nav>
+            <input type="text" id="search-bar" placeholder="Search for products...">
+            <button onclick="searchProducts()">Search</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="filter-section">
+            <h2>Filter Products</h2>
+            <label>
+                Category:
+                <select id="category-filter">
+                    <option value="">All</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="books">Books</option>
+                    <option value="clothing">Clothing</option>
+                </select>
+            </label>
+            <label>
+                Price:
+                <input type="number" id="price-min" placeholder="Min" />
+                -
+                <input type="number" id="price-max" placeholder="Max" />
+            </label>
+            <button onclick="applyFilters()">Apply Filters</button>
+        </section>
+
+        <section id="product-list">
+            <!-- Products will be dynamically inserted here -->
+        </section>
+    </main>
+
+    <footer>
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+#search-bar {
+    padding: 5px;
+    width: 300px;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+#filter-section {
+    width: 20%;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+}
+
+#product-list {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33% - 40px);
+    box-sizing: border-box;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+        <p>&copy; 2024 Online Marketplace</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+
+
+const products = [
+    { id: 1, name: 'Laptop', category: 'electronics', price: 999, image: 'laptop.jpg', description: 'High performance laptop' },
+    { id: 2, name: 'Book', category: 'books', price: 20, image: 'book.jpg', description: 'Interesting novel' },
+    { id: 3, name: 'T-shirt', category: 'clothing', price: 15, image: 'shirt.jpg', description: 'Comfortable cotton t-shirt' }
+];
+
+function displayProducts(productList) {
+    const productContainer = document.getElementById('product-list');
+    productContainer.innerHTML = '';
+    productList.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p>Price: $${product.price}</p>
+            <button onclick="viewProduct(${product.id})">View Details</button>
+        `;
+        productContainer.appendChild(productElement);
+    });
+}
+
+function searchProducts() {
+    const query = document.getElementById('search-bar').value.toLowerCase();
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query)
+    );
+    displayProducts(filteredProducts);
+}
+
+function applyFilters() {
+    const category = document.getElementById('category-filter').value;
+    const minPrice = parseFloat(document.getElementById('price-min').value) || 0;
+    const maxPrice = parseFloat(document.getElementById('price-max').value) || Infinity;
+
+    const filteredProducts = products.filter(product => 
+        (category === '' || product.category === category) &&
+        product.price >= minPrice &&
+        product.price <= maxPrice
+    );
+    displayProducts(filteredProducts);
+}
+
+// Initial display of all products
+displayProducts(products);
