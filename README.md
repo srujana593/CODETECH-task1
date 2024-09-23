@@ -4,7 +4,7 @@ Company:CODTECH IT SOLUTIONS
 ID:CTO8DS6954
 Domain:Web development
 Duration:august to september 2024
-Mentor:
+Mentor:neela santhosh kumar
 Project:ONLINE MARKETPLACE
 
 
